@@ -9,7 +9,7 @@ public class Product {
         new Thread(() -> {
             for (int i = 0; i < 10; i++) {
                 synchronized (list) {
-                    if (list.size() == CAPACITY) {
+                    while (list.size() == CAPACITY) {
                         try {
                             list.wait();
                         } catch (InterruptedException e) {
@@ -26,7 +26,7 @@ public class Product {
         new Thread(() -> {
             for (int i = 0; i < 10; i++) {
                 synchronized(list) {
-                    if (list.isEmpty()) {
+                    while (list.isEmpty()) {
                         try {
                             list.wait();
                         } catch (InterruptedException e) {
